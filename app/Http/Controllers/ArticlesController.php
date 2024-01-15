@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Articles;
+
 class ArticlesController extends Controller
 {
     /**
@@ -11,7 +16,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        $response = ['message' => 'index function'];
+        return response($response, 200);
     }
 
     /**
@@ -19,7 +25,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        $response = ['message' => 'create function'];
+        return response($response, 200);
     }
 
     /**
@@ -43,7 +50,8 @@ class ArticlesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $response = ['message' => 'edit function'];
+        return response($response, 200);
     }
 
     /**
@@ -51,7 +59,8 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $response = ['message' => 'update function'];
+        return response($response, 200);
     }
 
     /**
@@ -59,6 +68,7 @@ class ArticlesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $response = ['message' => 'delete function'];
+        return response($response, 200);
     }
 }

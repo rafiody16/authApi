@@ -17,7 +17,7 @@ class ApiAuthControlller extends Controller
         $validator = Validator::make($req->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
         if ($validator->fails()) {
             return response(['errors'=>$validator->errors()->all()], 422);
@@ -25,16 +25,22 @@ class ApiAuthControlller extends Controller
         $req['password'] = Hash::make($req['password']);
         $req['remember_token'] = Str::random(10);
         $user = User::create($req->toArray());
-        $token = $user->createToken('Laravel Paswword Grant Client')->AccessToken;
-        $response = ['token' => $token];
-        return response($response, 200);
+        // $token = $user->createToken('Laravel Paswword Grant Client')->accessToken;
+        // $response = ['token' => $token];
+        $data = User::where('name','=', $user->name)->first();
+        
+        return response() -> json([
+           'success' => true,
+           'message' => 'Berhasil menambahkan akun',
+           'token' => $data
+        ]);
     }
 
     public function login (Request $req)
     {
         $validator = Validator::make($req->all(), [
             'email' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
         if ($validator->fails()) 
         {

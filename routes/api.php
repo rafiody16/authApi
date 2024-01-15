@@ -15,15 +15,14 @@ use App\Http\Controllers\Auth\ApiAuthControlller;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::group(['middleware' => ['cors', 'json.response']], function() {
-    Route::post('/login', 'Auth\ApiAuthController@login')->name('login.api');
-    Route::post('/register', 'Auth\ApiAuthController@register')->name('register.api');
-
+    Route::post('/login', [ApiAuthControlller::class, 'login'])->name('login.api');
+    Route::post('/register', [ApiAuthControlller::class, 'register'])->name('register.api');
     Route::middleware('auth:api') -> group(function () {
-        Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+        Route::post('/logout', [ApiAuthControlller::class, 'logout'])->name('logout.api');
     });
 });
